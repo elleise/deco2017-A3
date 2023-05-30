@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Song Tracker</title>
+  <link href="songs.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <header></header>
+
+  <div class="text-div">
+    <p class="p1">Welcome to your,</p>
+    <p class="p2">SONG MOOD TRACKER</p>
+    <p class="p3">
+      Assign how you feel or what are you doing with the song you are listening to.
+      Track your listening habits and activity throughout the day. Reflect on how your
+      music choices are driven by your state and routines.
+    </p>
+    <p class="p1">Add a new entry,</p>
+  </div>
+
+  <div class="input-form-div">
+
+    <form id="songform">
+
+      <h3>WHAT SONG ARE YOU LISTENING TO?</h3>
+      <div class="form-row">
+        <label for="songName">SONG NAME</label>
+        <input type="text" name="songName" id="songName" required="true" />
+      </div>
+      <div class="form-row">
+        <label for="artist">ARTIST</label>
+        <input type="text" name="artist" id="artist" required="true" />
+      </div>
+      <div class="form-row">
+        <label for="genre">GENRE</label>
+        <input type="text" name="genre" id="genre" required="true" />
+      </div>
+
+
+      <h3>HOW ARE YOU?</h3>
+      <div class="form-row">
+        <label for="mood">MOOD</label>
+        <select id="mood" name="mood" required="true">
+          <option value="">Select one</option>
+          <option value="Happiness">Happiness</option>
+          <option value="Peaceful">Peaceful</option>
+          <option value="Lazy">Lazy</option>
+          <option value="Thankful">Thankful</option>
+          <option value="Relaxed">Relaxed</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="description">DESCRIPTION</label>
+        <input type="text" name="description" id="description" required="true" />
+      </div>
+      <div class="form-row">
+        <input type="submit">
+      </div>
+    </form>
+  </div>
+
+  <div class="song-list-div">
+    <ul id="songs">
+    </ul>
+  </div>
+
+  <script src="songs.js"></script>
+</body>
+
+</html>

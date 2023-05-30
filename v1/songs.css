@@ -1,0 +1,179 @@
+.input-form-div {
+    width: 60%;
+    margin: auto;
+  }
+  
+  .text-div {
+    width: 60%;
+    margin: auto;
+    /*
+    border: 3px solid green;
+    padding: 10px;
+    display: inline-block; 
+    */
+  }
+  
+  .song-list-div {
+    width: 60%;
+    margin: auto;
+    border: 1px solid black;
+  }
+  
+  .p1 {
+    font-size:x-large;
+    color: white;
+    background-color: rgb(49, 45, 45);
+    text-align: center;
+    height: 50px;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    border: 0.5px solid black;
+  }
+  
+  .p2 {
+    color: rgb(209, 201, 91);
+    background-color: rgb(242, 247, 248);
+    text-align: center;
+    height: 30px;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    border: 0.5px solid grey;
+  }
+  
+  .p3 {
+    color: rgb(126, 130, 141);
+    background-color: rgb(242, 247, 248);
+    margin-top: 0%;
+    margin-bottom: 0%;
+    height: 100px;
+    text-align: center;
+    border: 0.5px solid black;
+  }
+  
+  h3 {
+    margin-bottom: 1em;
+    text-align: center;
+    text-decoration: underline;
+  }
+  
+  form {
+    margin: 0 auto;
+    border: 2px solid grey;
+    padding: 1em;
+    
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: flex-end;
+    padding: .5em;
+  }
+  
+  .form-row > label {
+    width: 200px;
+  }
+  
+  .form-row > input,
+  .form-row > select {
+    padding: .5em;
+    flex-grow: 1;
+  }
+  
+  
+  #songlist {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin-block-start: 0;
+    padding: 0;
+  }
+  
+  #songlist li {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    border: 1px solid gray;
+  /*
+    padding: 1em;
+    margin-bottom: 1em;
+  */
+  }
+  
+  #songlist li p {
+    flex-grow: 1;
+    margin-left: 10px;
+    max-width: 200px;
+    vertical-align: top;
+  }
+  #songlist li span {
+    text-align: right;
+    flex-grow: 1;
+    margin-right: 10px;
+    max-width: 200px;
+    vertical-align: top;
+  }
+  
+  #songlist li input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+  }
+  
+  #songlist li button {
+    width: 40px;
+    height: 30px;
+  }
+  
+  .item {
+    border: 1px solid grey;
+    margin-bottom: 2px;
+  }
+  
+  .item-mood-row {
+    margin-left: 5%;
+    font-size: medium;
+  }
+  
+  .item-song-row {
+    background-color: aliceblue;
+    display:flex;
+    flex-direction: row;
+    border-top: 1px solid gray;
+  }
+  
+  .item-image {
+    width: 50px;
+  }
+  
+  .item-song-name {
+    flex-grow: 2;
+    font-size: small;
+  }
+  
+  .item-created-time {
+    flex-grow: 1;
+    color: burlywood;
+    font-size: small;
+    text-align: right;
+  }
+  
+  /*
+  #songs {
+    margin-left: 2%;
+    margin-right: 2%;
+    column-count: 2;
+    list-style-type: none;
+  }
+  */
+  
+  #songs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    list-style-type: none;
+    margin-right: 3%;
+  }
+  
+  #songs li {
+    padding: 2px;
+  }
+  
