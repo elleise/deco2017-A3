@@ -42,7 +42,7 @@ function displaySong(song) {
 */
   songlistElem.appendChild(item);
   form.reset();
- 
+
 }
 
 // Create an array called 'taskList'
