@@ -2,14 +2,29 @@
 const form = document.getElementById('songform');
 const songlistElem = document.querySelector('#songs');
 
-//  event after log entry button 
-//  add song will add all values including id
-//  push into songlist and call displaySong
+// const selectGenre = document.querySelector('select')
+// const img = document.querySelector('img')
+// const genre = ["./genreImages/Electronic dance music.jpeg", "./genreImages/Hip hop.jpeg", "./genreImages/Pop music.jpeg", "./genreImages/RNB.jpeg", "./genreImages/Rock.jpeg"]
 
+const selectGenre = document.querySelector('select')
+const img = document.querySelector('img')
+const genre = ["./genreImages/Electronic dance music.jpeg", "./genreImages/RNB.jpeg", "./genreImages/Pop music.jpeg", "./genreImages/Hip hop.jpeg", "./genreImages/Electronic dance music.jpeg", "./genreImages/Rock.jpeg"]
+
+// console.log(genreImageMapping);
+// selectGenre.addEventListener('change', () =>  {
+//   img.setAttribute('src', genre[selectGenre.selectedIndex])
+// })
+var selectedImg = "./genreImages/Electronic dance music.jpeg";
+selectGenre.addEventListener('change', () =>  {
+  selectedImg = genre[selectGenre.selectedIndex];
+  console.log(selectedImg);
+})
+
+//listening out for submission event on the form itself
 form.addEventListener('submit', function(event){
   // Block the default submission behaviour
   event.preventDefault();
-  /*Do something*/
+  //all values below come from the form
   addSong(
     form.elements.songName.value,
     form.elements.artist.value, 
@@ -19,40 +34,75 @@ form.addEventListener('submit', function(event){
   );
 })
 
-// data id is the date, create class for li - allows me to search up all the li items for last step to remove record
-// 7 blocks from list item inide one div to remove an item. you need to find the li through its id set by setattribute, where we set the song.id to the dataid
+document.getElementById("songform").addEventListener("submit", function(e) {
+    e.preventDefault(); // prevent form submission
 
-function displaySong(song) {
-  let item = document.createElement('li');
-  item.setAttribute('dataid', song.id);
-  item.className = "songs-li";
-  item.innerHTML = 
-    `<div class="item">
-      <div class="item-mood-row">
-          ${song.mood}
-      </div>
-      <div class="item-song-row">
-          <div class="item-image">
-              <img id="myImg" src="image1.jpg" alt='${song.description}' width="40" height="40" onclick="image(this, ${song.id})">
-          </div>
-          <div class="item-song-name">
-              <b>${song.songName}</b> <br> ${song.artist}
-          </div>
-          <div class="item-created-time">
-              FEB 16, 2023 - 6:00PM
-          </div>
-      </div>
-    </div> `;
+    // Display the current date and time
+  //will always return first item , attach time variable to object you are creating 
+    document.querySelector(".item-created-time").innerHTML = formattedDate;
+  });
 
-  songlistElem.appendChild(item);
-  form.reset();
+//taking song items object and creating a new list item element, setting the attribute for the element
+function displaySongs() {
+  //work out if songs need to be displayed on the page
+  songlistElem.innerHTML = "";
+  let localSongs = JSON.parse(localStorage.getItem('songs'));
+
+  //check to see if localSongs element is empty
+  if (localSongs !== null) {
+
+    //forEach loop to go through the array we stored as localSongs variable
+    localSongs.forEach((song) => {
+
+    let item = document.createElement('li');
+    item.setAttribute('dataid', song.id);
+    item.className = "songs-li";
+    //innerHTML is used to format how song list items are displayed
+    item.innerHTML = 
+      `<div class="item">
+        <div class="item-mood-row">
+            ${song.mood}
+        </div>
+        <div class="item-song-row">
+            <div class="img">
+                <img id="genre" src='${selectedImg}' alt='${song.description}' width="40" height="40" onclick="image(this, ${song.id})">
+            </div>
+            <div class="item-song-name">
+                <b>${song.songName}</b> <br> ${song.artist}
+            </div>
+            <div class="item-created-time">
+            ${song.formattedDate}
+            </div>
+        </div>
+      </div> `;
+  
+    //appends that item to the songlistElem established in line 3
+    songlistElem.appendChild(item);
+    form.reset();
+      
+    }) //Closing brackets for forLoop
+  } // Closing bracket for if statement
 }
 
-// song.id displays image
-// Create an array called 'taskList'
-var songList = [];
+//This array for song items added is no longer needed as I have the localSong array, reducing the complexity of my code
+// var songList = [];
 
+
+//variable attached to song that is created, each value is unique happening at current time
+
+// Function to add songs to the list
 function addSong(songName, artist, genre, mood, description) {
+    // Get the current date and time
+    var currentDate = new Date();
+    var month = currentDate.toLocaleString("en-US", { month: "short" });
+    var day = currentDate.getDate();
+    var year = currentDate.getFullYear();
+    var hour = currentDate.getHours();
+    var minute = currentDate.getMinutes();
+    var ampm = hour >= 12 ? "PM" : "AM";
+
+    // Format the date and time
+    var formattedDate = month + " " + day + ", " + year + " - " + hour + ":" + (minute < 10 ? "0" + minute : minute) + ampm;
 
   // Creating the object, directly passing in the input parameters
   let song = {
@@ -61,18 +111,44 @@ function addSong(songName, artist, genre, mood, description) {
     artist,
     genre,
     mood,
-    description
-  };
+    description,
+    formattedDate
+    //assign local variable myImg to selectedImg
+  }
 
-  songList.push(song);
-  displaySong(song);
+  //checks local storage if an item/items exists
+  //fetch and parse localStorage value
+  let localSongs = JSON.parse(localStorage.getItem('songs'));
+  
+  //check whether variable localSongs is empty (null) or contains a value
+
+  //if there are no items in local storage
+    if (localSongs == null) {
+        localSongs = [song];
+    } else {
+  // check to see if there is an existing item with the same properties
+        if (localSongs.find(element => element.id === song.id)) {
+            console.log('Task id already exists');
+        } else {
+            localSongs.push(song);
+        }
+    }
+  
+  //pushes objects into empty array above songList
+  //no need to push into songList after it's pushed into localSongs
+  // songList.push(song);
+
+  //set this new item localSongs in our localStorage object
+  localStorage.setItem('songs', JSON.stringify(localSongs))
+  //call displayTask after the object is pushed 
+  displaySongs();
 }
 
 // Call the function with test values for the input paramaters
 addSong("Working", "Sam Hui", "Genre", "Relaxed", "Relaxed song from Sam");
 
 // Log the array to the console.
-console.log(songList);
+// console.log(songList);
 
 // Get the modal
 var modal = document.getElementById("myModal");
@@ -84,9 +160,6 @@ var captionText = document.getElementById("caption");
 var delButton = document.getElementsByClassName("del-button")[0];
 var modalItem = null;
 var modalLiItem = null;
-
-// block summons screen, src loads the image , img.alt displays description, find out which li item has the song item
-// when you clickl delete, this findLiElementById tells me which modal box correponds to a specific song item 
 
 function image(img, songId) {
   modal.style.display = "block";
@@ -113,21 +186,25 @@ var span = document.getElementsByClassName("close")[0];
 span.onclick = function() { 
   modal.style.display = "none";
 }
-console.log(songList);
 
+// Listen for when the delete button is clicked, where we loop through tasks in array to check whether the id of the current task in the loop is equal to the id attribute that we set on the item. If it is, we use the splice function to delete that from the array
 
 delButton.addEventListener('click', handleDelEvent);
 
 function handleDelEvent(event) {
-  console.log(songList);
   console.log(modalItem.alt);
-  
+  // localStorage.removeItem('localSongs');
+
   modalLiItem.remove();
-  songList.forEach(function(songArrayElement, songArrayIndex){
+  localSongs.forEach(function(songArrayElement, songArrayIndex){
     if (songArrayElement.id == modalItem.getAttribute('dataid')) {
-      songList.splice(songArrayIndex, 1);
+      localSongs.splice(songArrayIndex, 1);
     }
   })
 
+  localStorage.setItem('songs', JSON.stringify(localSongs));
+
   console.log(songList);
 }
+
+displaySongs();

@@ -72,42 +72,10 @@ body {
   margin: auto;
 }
 
-
 .song-list-div {
   width: 100%;
   margin: auto;
   border: 1px solid black;
-}
-
-.p1 {
-  font-size:x-large;
-  color: white;
-  background-color: rgb(49, 45, 45);
-  text-align: center;
-  height: 50px;
-  margin-top: 0%;
-  margin-bottom: 0%;
-  border: 0.5px solid black;
-}
-
-.p2 {
-  color: rgb(209, 201, 91);
-  background-color: rgb(242, 247, 248);
-  text-align: center;
-  height: 30px;
-  margin-top: 0%;
-  margin-bottom: 0%;
-  border: 0.5px solid grey;
-}
-
-.p3 {
-  color: rgb(126, 130, 141);
-  background-color: rgb(242, 247, 248);
-  margin-top: 0%;
-  margin-bottom: 0%;
-  height: 100px;
-  text-align: center;
-  border: 0.5px solid black;
 }
 
 h3 {
@@ -120,7 +88,6 @@ form {
   margin: 0 auto;
   border: 2px solid grey;
   padding: 1em;
-  
 }
 
 .form-row {
@@ -201,7 +168,7 @@ form {
   border-top: 1px solid gray;
 }
 
-.item-image {
+img {
   width: 50px;
 }
 

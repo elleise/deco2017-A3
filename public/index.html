@@ -9,6 +9,7 @@
 </head>
 
 <body>
+  <header></header>
   <!-- The Modal -->
   <div id="myModal" class="modal">
     <div class="modal-display-area">
@@ -18,8 +19,6 @@
       <div id="del-button-div"><button class="del-button">🗑️</button></div>
     </div>
   </div>
-
-<!-- body is split into three sections, one part is the content/context, second part is the div class that contains the form split into two columns -->
 
 <div class="container">
     <div class="first-rectangle">
@@ -39,7 +38,6 @@
   </div>
 
   <div class="input-form-div">
-
     <form id="songform">
       <div class="row">
         <div class="column">
@@ -54,21 +52,21 @@
           </div>
           <div class="form-row">
             <label for="genre">GENRE</label>
-            <input type="text" name="genre" id="genre" required="true" />
+            <select id="genre" name="genre" required="true">
+              <option value="">Select one</option>
+              <option value="RNB">RNB</option>
+              <option value="Pop music">Pop music</option>
+              <option value="Hip hop">Hip hop</option>
+              <option value="Electronic dance music">Electronic dance music</option>
+              <option value="Rock">Rock</option>
+            </select>
           </div>
         </div>
         <div class="column">
           <h3>HOW ARE YOU?</h3>
           <div class="form-row">
             <label for="mood">MOOD</label>
-            <select id="mood" name="mood" required="true">
-              <option value="">Select one</option>
-              <option value="Happiness">Happiness</option>
-              <option value="Peaceful">Peaceful</option>
-              <option value="Lazy">Lazy</option>
-              <option value="Thankful">Thankful</option>
-              <option value="Relaxed">Relaxed</option>
-            </select>
+            <input type="text" name="mood" id="mood" required="true" />
           </div>
           <div class="form-row">
             <label for="description">DESCRIPTION</label>
@@ -81,8 +79,6 @@
       </div>
     </form>
   </div>
-
-<!-- third part is the song-list-div class, responsible for the format - list id is the list of songs -->
 
   <div class="song-list-div">
     <ul id="songs">
