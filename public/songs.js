@@ -15,38 +15,32 @@ const genre = ["./genreImages/Electronic dance music.jpeg", "./genreImages/RNB.j
 //   img.setAttribute('src', genre[selectGenre.selectedIndex])
 // })
 var selectedImg = "./genreImages/Electronic dance music.jpeg";
-selectGenre.addEventListener('change', () =>  {
+selectGenre.addEventListener('change', () => {
   selectedImg = genre[selectGenre.selectedIndex];
   console.log(selectedImg);
 })
 
 //listening out for submission event on the form itself
-form.addEventListener('submit', function(event){
+form.addEventListener('submit', function (event) {
   // Block the default submission behaviour
   event.preventDefault();
   //all values below come from the form
   addSong(
     form.elements.songName.value,
-    form.elements.artist.value, 
+    form.elements.artist.value,
     form.elements.genre.value,
     form.elements.mood.value,
     form.elements.description.value
   );
 })
 
-document.getElementById("songform").addEventListener("submit", function(e) {
-    e.preventDefault(); // prevent form submission
-
-    // Display the current date and time
-  //will always return first item , attach time variable to object you are creating 
-    document.querySelector(".item-created-time").innerHTML = formattedDate;
-  });
-
 //taking song items object and creating a new list item element, setting the attribute for the element
 function displaySongs() {
   //work out if songs need to be displayed on the page
   songlistElem.innerHTML = "";
   let localSongs = JSON.parse(localStorage.getItem('songs'));
+  console.log("list local songs");
+  console.log(localSongs);
 
   //check to see if localSongs element is empty
   if (localSongs !== null) {
@@ -54,18 +48,18 @@ function displaySongs() {
     //forEach loop to go through the array we stored as localSongs variable
     localSongs.forEach((song) => {
 
-    let item = document.createElement('li');
-    item.setAttribute('dataid', song.id);
-    item.className = "songs-li";
-    //innerHTML is used to format how song list items are displayed
-    item.innerHTML = 
-      `<div class="item">
+      let item = document.createElement('li');
+      item.setAttribute('dataid', song.id);
+      item.className = "songs-li";
+      //innerHTML is used to format how song list items are displayed
+      item.innerHTML =
+        `<div class="item">
         <div class="item-mood-row">
             ${song.mood}
         </div>
         <div class="item-song-row">
             <div class="img">
-                <img id="genre" src='${selectedImg}' alt='${song.description}' width="40" height="40" onclick="image(this, ${song.id})">
+                <img id="genre" src='${song.myImage}' alt='${song.description}' width="40" height="40" onclick="image(this, ${song.id})">
             </div>
             <div class="item-song-name">
                 <b>${song.songName}</b> <br> ${song.artist}
@@ -75,11 +69,11 @@ function displaySongs() {
             </div>
         </div>
       </div> `;
-  
-    //appends that item to the songlistElem established in line 3
-    songlistElem.appendChild(item);
-    form.reset();
-      
+
+      //appends that item to the songlistElem established in line 3
+      songlistElem.appendChild(item);
+      form.reset();
+
     }) //Closing brackets for forLoop
   } // Closing bracket for if statement
 }
@@ -87,22 +81,23 @@ function displaySongs() {
 //This array for song items added is no longer needed as I have the localSong array, reducing the complexity of my code
 // var songList = [];
 
+var localSongs = JSON.parse(localStorage.getItem('songs'));
 
 //variable attached to song that is created, each value is unique happening at current time
 
 // Function to add songs to the list
 function addSong(songName, artist, genre, mood, description) {
-    // Get the current date and time
-    var currentDate = new Date();
-    var month = currentDate.toLocaleString("en-US", { month: "short" });
-    var day = currentDate.getDate();
-    var year = currentDate.getFullYear();
-    var hour = currentDate.getHours();
-    var minute = currentDate.getMinutes();
-    var ampm = hour >= 12 ? "PM" : "AM";
+  // Get the current date and time
+  var currentDate = new Date();
+  var month = currentDate.toLocaleString("en-US", { month: "short" });
+  var day = currentDate.getDate();
+  var year = currentDate.getFullYear();
+  var hour = currentDate.getHours();
+  var minute = currentDate.getMinutes();
+  var ampm = hour >= 12 ? "PM" : "AM";
 
-    // Format the date and time
-    var formattedDate = month + " " + day + ", " + year + " - " + hour + ":" + (minute < 10 ? "0" + minute : minute) + ampm;
+  // Format the date and time
+  var formattedDate = month + " " + day + ", " + year + " - " + hour + ":" + (minute < 10 ? "0" + minute : minute) + ampm;
 
   // Creating the object, directly passing in the input parameters
   let song = {
@@ -112,28 +107,28 @@ function addSong(songName, artist, genre, mood, description) {
     genre,
     mood,
     description,
-    formattedDate
-    //assign local variable myImg to selectedImg
+    formattedDate,
+    myImage: selectedImg
   }
 
   //checks local storage if an item/items exists
-  //fetch and parse localStorage value
-  let localSongs = JSON.parse(localStorage.getItem('songs'));
-  
+  //fetch and parse localStorage value, i
+  localSongs = JSON.parse(localStorage.getItem('songs'));
+
   //check whether variable localSongs is empty (null) or contains a value
 
   //if there are no items in local storage
-    if (localSongs == null) {
-        localSongs = [song];
+  if (localSongs == null) {
+    localSongs = [song];
+  } else {
+    // check to see if there is an existing item with the same properties
+    if (localSongs.find(element => element.id === song.id)) {
+      console.log('Task id already exists');
     } else {
-  // check to see if there is an existing item with the same properties
-        if (localSongs.find(element => element.id === song.id)) {
-            console.log('Task id already exists');
-        } else {
-            localSongs.push(song);
-        }
+      localSongs.push(song);
     }
-  
+  }
+
   //pushes objects into empty array above songList
   //no need to push into songList after it's pushed into localSongs
   // songList.push(song);
@@ -145,7 +140,7 @@ function addSong(songName, artist, genre, mood, description) {
 }
 
 // Call the function with test values for the input paramaters
-addSong("Working", "Sam Hui", "Genre", "Relaxed", "Relaxed song from Sam");
+//addSong("Working", "Sam Hui", "Genre", "Relaxed", "Relaxed song from Sam");
 
 // Log the array to the console.
 // console.log(songList);
@@ -176,14 +171,14 @@ function findLiElementById(songId) {
       console.log(songId);
       return liItems[i];
     }
-  }  
+  }
 }
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() { 
+span.onclick = function () {
   modal.style.display = "none";
 }
 
@@ -193,10 +188,9 @@ delButton.addEventListener('click', handleDelEvent);
 
 function handleDelEvent(event) {
   console.log(modalItem.alt);
-  // localStorage.removeItem('localSongs');
 
   modalLiItem.remove();
-  localSongs.forEach(function(songArrayElement, songArrayIndex){
+  localSongs.forEach(function (songArrayElement, songArrayIndex) {
     if (songArrayElement.id == modalItem.getAttribute('dataid')) {
       localSongs.splice(songArrayIndex, 1);
     }
@@ -204,7 +198,9 @@ function handleDelEvent(event) {
 
   localStorage.setItem('songs', JSON.stringify(localSongs));
 
-  console.log(songList);
+  modal.style.display = 'none';
+
+  console.log(localSongs);
 }
 
 displaySongs();
