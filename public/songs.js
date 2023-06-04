@@ -21,7 +21,7 @@ selectGenre.addEventListener('change', () => {
 })
 
 //listening out for submission event on the form itself
-form.addEventListener('submit', function (event) {
+form.addEventListener('submit', function(event) {
   // Block the default submission behaviour
   event.preventDefault();
   //all values below come from the form
@@ -178,7 +178,7 @@ function findLiElementById(songId) {
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function () {
+span.onclick = function() {
   modal.style.display = "none";
 }
 
@@ -190,17 +190,18 @@ function handleDelEvent(event) {
   console.log(modalItem.alt);
 
   modalLiItem.remove();
-  localSongs.forEach(function (songArrayElement, songArrayIndex) {
-    if (songArrayElement.id == modalItem.getAttribute('dataid')) {
+  localSongs.forEach(function(songArrayElement, songArrayIndex) {
+    if (songArrayElement.id == modalLiItem.getAttribute('dataid')) {
       localSongs.splice(songArrayIndex, 1);
+      console.log('removed');
     }
   })
 
   localStorage.setItem('songs', JSON.stringify(localSongs));
-
+  //closes modal box when the delete button is clicked
   modal.style.display = 'none';
-
   console.log(localSongs);
+  console.log(modalItem.getAttribute('dataid'))
 }
 
 displaySongs();
