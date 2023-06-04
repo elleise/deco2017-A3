@@ -8,6 +8,12 @@
   <link href="songs.css" rel="stylesheet" type="text/css" />
 </head>
 
+  <style>
+    body {
+      background: #EDEBEB;
+    }
+  </style>
+
 <body>
   <header></header>
   <!-- The Modal -->
@@ -16,11 +22,17 @@
       <span class="close">&times;</span>
       <img class="modal-content" id="img01">
       <div id="caption"></div>
-      <div id="del-button-div"><button class="del-button">🗑️</button></div>
+      <div id="del-button-div">
+        <button class="del-button">&#8854;</button>
+        <p id="del-description">Remove from your list</p>
+      </div>
+      <div id="description-div">
+        <p id="entry-description">My Entry</p>
+        <p id="description">My Entry</p>
+      </div>
     </div>
   </div>
 
-  
 <div class="container">
     <div class="first-rectangle">
       <span>Welcome to your,</span>
@@ -42,19 +54,27 @@
     <form id="songform">
       <div class="row">
         <div class="column">
-          <h3>WHAT SONG ARE YOU LISTENING TO?</h3>
+          <h1 class="thick">WHAT SONG ARE YOU LISTENING TO?</h1>
           <div class="form-row">
             <label for="songName">SONG NAME</label>
-            <input type="text" name="songName" id="songName" required="true" />
+            <input type="text" 
+                    name="songName" 
+                    id="songName" 
+                    required="true"
+                    placeholder="Enter your song's name"/>
           </div>
           <div class="form-row">
             <label for="artist">ARTIST</label>
-            <input type="text" name="artist" id="artist" required="true" />
+            <input type="text" 
+                    name="artist" 
+                    id="artist"   
+                    required="true"
+                    placeholder="Enter your song's artist name"/>
           </div>
           <div class="form-row">
             <label for="genre">GENRE</label>
             <select id="genre" name="genre" required="true">
-              <option value="">Select one</option>
+              <option value="">Select your song's genre</option>
               <option value="RNB">RNB</option>
               <option value="Pop music">Pop music</option>
               <option value="Hip hop">Hip hop</option>
@@ -64,16 +84,24 @@
           </div>
         </div>
         <div class="column">
-          <h3>HOW ARE YOU?</h3>
+          <h1 class="thick">HOW ARE YOU?</h1>
           <div class="form-row">
             <label for="mood">MOOD</label>
-            <input type="text" name="mood" id="mood" required="true" />
+            <input type="text" 
+                    name="mood" 
+                    id="mood" 
+                    required="true"
+                    placeholder="Enter your mood"/>
           </div>
           <div class="form-row">
             <label for="description">DESCRIPTION</label>
-            <input type="text" name="description" id="description" required="true" />
+            <input type="text" 
+                    name="description"   
+                    id="description" 
+                    required="true"
+                    placeholder="Enter your description"/>
           </div>
-          <div class="form-row">
+          <div class="form-submit-btn">
             <input type="submit" value="LOG ENTRY">
           </div>
         </div>
@@ -82,6 +110,7 @@
   </div>
 
   <div class="song-list-div">
+    <h1>YOUR ENTRIES</h1>
     <ul id="songs">
     </ul>
   </div>

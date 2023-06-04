@@ -59,7 +59,7 @@ function displaySongs() {
         </div>
         <div class="item-song-row">
             <div class="img">
-                <img id="genre" src='${song.myImage}' alt='${song.description}' width="40" height="40" onclick="image(this, ${song.id})">
+                <img id="genre" src='${song.myImage}' alt='${song.genre}'  onclick="image(this, ${song.id}, '${song.description}')">
             </div>
             <div class="item-song-name">
                 <b>${song.songName}</b> <br> ${song.artist}
@@ -152,14 +152,16 @@ var modal = document.getElementById("myModal");
 //var img = document.getElementById("myImg");
 var modalImg = document.getElementById("img01");
 var captionText = document.getElementById("caption");
+var description = document.getElementById("description");
 var delButton = document.getElementsByClassName("del-button")[0];
 var modalItem = null;
 var modalLiItem = null;
 
-function image(img, songId) {
+function image(img, songId, descText) {
   modal.style.display = "block";
   modalImg.src = img.src;
   captionText.innerHTML = img.alt;
+  description.innerHTML = descText;
   modalItem = img;
   modalLiItem = findLiElementById(songId);
 }
