@@ -1,6 +1,6 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic);
-@import url(https://fonts.googleapis.com/css?family=Noto+Sans+TC:100,300,regular,500,700,900);
-@import url(https://fonts.googleapis.com/css?family=PT+Sans+Caption:regular,700);
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,300);
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans+TC:300,regular);
+@import url(https://fonts.googleapis.com/css?family=PT+Sans+Caption:regular);
 
 body {
   margin: 0;
@@ -40,6 +40,8 @@ body {
   font-family: 'PT Sans Caption', sans-serif;
   margin-left: 100px;
   padding-top: 1px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .content p {
@@ -48,7 +50,8 @@ body {
   color: #707070;
   font-size: 46px;
   margin-left: 100px;
-  line-height: 0.4;
+  margin-right: 30px;
+  line-height: 1.5;
 }
 
 .second-rectangle span {
@@ -225,15 +228,6 @@ img {
   text-align: right;
 }
 
-/*
-#songs {
-  margin-left: 2%;
-  margin-right: 2%;
-  column-count: 2;
-  list-style-type: none;
-}
-*/
-
 /* link to divide songlist into two columns */
 #songs {
   display: grid;
@@ -275,6 +269,7 @@ img {
 }
 
 .modal-display-area {
+  overflow: scroll;
   margin: auto;
   display: block;
   width: 30%;
@@ -321,8 +316,9 @@ img {
   font-family: 'PT Sans Caption', sans-serif;
   margin-top: 10%;
   font-size: 24px;
-  margin-bottom: 0px;
+  margin-bottom: 10px;
 }
+
 #description {
   margin-top: 0%;
   font-size: 18px;
@@ -341,6 +337,7 @@ img {
   border: none;
   background: none;
   font-size: x-large;
+  color: #007afe;
 }
 
 .del-button:hover,
@@ -390,3 +387,146 @@ img {
   cursor: pointer;
 }
 
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 900px) {
+  .column {
+    width: 80%;
+  }
+}
+
+@media (max-width: 900px) {
+  #songs { grid-template-columns: repeat(1, 1fr); }
+}
+
+@media (max-width: 700px) {
+
+.first-rectangle {
+  width: 12em;
+  height: 60vh;
+}
+  
+.first-rectangle span,
+.second-rectangle span {
+  margin-left: 1em;
+  text-align: left;
+  font-size: 90px;
+  line-height: 5;
+}
+
+.line {
+  width: calc(100% + 820px);
+  margin: 0 -20px;
+  border-top: 1px solid black;
+}
+
+.content .pink-text {
+  font-size: 90px;
+  white-space: nowrap;
+  margin-left: 1em;
+}
+
+.content p {
+  font-size: 80px;
+  width: 1000px;
+}
+
+.second-rectangle {
+  width: 12em;
+  height: 60vh;
+}
+
+h1 {
+  font-size: 55px;
+  margin-left: 1em;
+  white-space: nowrap;
+  margin-top: 100px;
+}
+
+.form-row > label {
+  font-size: 50px;
+  white-space: nowrap;
+}
+
+/* input box and option values, flex-grow  */
+.form-row > input,
+.form-row > input::placeholder,
+.form-row > select,
+.form-submit-btn input {
+  width: 1000px;
+  font-size: 50px;
+}
+
+/* #description {
+  width: 1000px;
+  font-size: 50px;
+} */
+
+.song-list-div {
+  border: none;
+}
+
+.song-list-div > h1 {
+  color: black;
+  font-size: 90px;
+  margin-left: 1em;
+}
+
+#songs li {
+  width: 1100px;
+}
+
+.item-mood-row { 
+  font-size: 50px;
+}
+
+.item-song-name,
+.item-created-time {
+  font-size: 40px;
+}
+  
+img {
+    width: 130px;
+}
+  
+/* I retrieved the css positon from https://stackoverflow.com/questions/19467693/how-to-make-popup-look-at-the-centre-of-the-screen to make my popup exactly centeredapplying a negative top margin of half the div height, and a negative left margin of half the div width */
+
+.modal-display-area {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 70%
+}
+
+.close {
+  font-size: 80px;
+}
+
+.modal-content {
+    margin-top: 10em;
+}
+  
+#caption {
+  font-size: 60px;
+}
+
+#del-description {
+  font-size: 40px;
+}
+
+.del-button {
+  font-size: 80px;
+}
+
+#entry-description {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+#description {
+    width: 700;
+    font-size: 35px;
+}
+  
+}
