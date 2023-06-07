@@ -2,29 +2,28 @@
 const form = document.getElementById('songform');
 const songlistElem = document.querySelector('#songs');
 
-// const selectGenre = document.querySelector('select')
-// const img = document.querySelector('img')
-// const genre = ["./genreImages/Electronic dance music.jpeg", "./genreImages/Hip hop.jpeg", "./genreImages/Pop music.jpeg", "./genreImages/RNB.jpeg", "./genreImages/Rock.jpeg"]
+// Select change event, directly update the attribute for the img src 
+// selectGenre - selects from the option values <select>
+// selectGenre is the object inside the HTML for the select button
 
 const selectGenre = document.querySelector('select')
 const img = document.querySelector('img')
 const genre = ["./genreImages/Electronic dance music.jpeg", "./genreImages/RNB.jpeg", "./genreImages/Pop music.jpeg", "./genreImages/Hip hop.jpeg", "./genreImages/Electronic dance music.jpeg", "./genreImages/Rock.jpeg"]
 
-// console.log(genreImageMapping);
-// selectGenre.addEventListener('change', () =>  {
-//   img.setAttribute('src', genre[selectGenre.selectedIndex])
-// })
 var selectedImg = "./genreImages/Electronic dance music.jpeg";
 selectGenre.addEventListener('change', () => {
   selectedImg = genre[selectGenre.selectedIndex];
   console.log(selectedImg);
 })
 
-//listening out for submission event on the form itself
+//  Event after log entry button 
+//  addSong will add all values including id, pushing these values into songlist and call displaySong
+// Listening out for submission event on the form itself
 form.addEventListener('submit', function(event) {
   // Block the default submission behaviour
   event.preventDefault();
-  //all values below come from the form
+  // All values below come from the form
+  // addSong function being called with the following input elements
   addSong(
     form.elements.songName.value,
     form.elements.artist.value,
@@ -34,24 +33,28 @@ form.addEventListener('submit', function(event) {
   );
 })
 
-//taking song items object and creating a new list item element, setting the attribute for the element
+// Taking song items object and creating a new list item element, setting the attribute for the element
+// Data id is the date, create class for li - allows me to search up all the li items for last step to remove record
+// You need to find the li through its id set by setattribute, where we set the song.id to the dataid
+
 function displaySongs() {
-  //work out if songs need to be displayed on the page
+  // Work out if songs need to be displayed on the page
   songlistElem.innerHTML = "";
   let localSongs = JSON.parse(localStorage.getItem('songs'));
   console.log("list local songs");
   console.log(localSongs);
 
-  //check to see if localSongs element is empty
+  // Checks to see if the localSongs element is empty
   if (localSongs !== null) {
 
-    //forEach loop to go through the array we stored as localSongs variable
+    // ForEach loop to go through the array we stored as localSongs variable
     localSongs.forEach((song) => {
 
       let item = document.createElement('li');
+      // song.id retrieves id of song object
       item.setAttribute('dataid', song.id);
       item.className = "songs-li";
-      //innerHTML is used to format how song list items are displayed
+      // innerHTML is used to format how song list items are displayed
       item.innerHTML =
         `<div class="item">
         <div class="item-mood-row">
@@ -70,7 +73,7 @@ function displaySongs() {
         </div>
       </div> `;
 
-      //appends that item to the songlistElem established in line 3
+      // Appends that item to the songlistElem established in line 3
       songlistElem.appendChild(item);
       form.reset();
 
@@ -83,7 +86,7 @@ function displaySongs() {
 
 var localSongs = JSON.parse(localStorage.getItem('songs'));
 
-//variable attached to song that is created, each value is unique happening at current time
+// Time variable attached to song that is created, each value is unique happening at current time
 
 // Function to add songs to the list
 function addSong(songName, artist, genre, mood, description) {
@@ -96,7 +99,7 @@ function addSong(songName, artist, genre, mood, description) {
   var minute = currentDate.getMinutes();
   var ampm = hour >= 12 ? "PM" : "AM";
 
-  // Format the date and time
+  // Format the date and time, retrieved from chatGPT and https://stackoverflow.com/questions/1001937/auto-insert-date-and-time-in-form-input-field
   var formattedDate = month + " " + day + ", " + year + " - " + hour + ":" + (minute < 10 ? "0" + minute : minute) + ampm;
 
   // Creating the object, directly passing in the input parameters
@@ -111,45 +114,33 @@ function addSong(songName, artist, genre, mood, description) {
     myImage: selectedImg
   }
 
-  //checks local storage if an item/items exists
-  //fetch and parse localStorage value, i
+  // Checks local storage if an item/items exists
+  // Fetch and parse localStorage value
   localSongs = JSON.parse(localStorage.getItem('songs'));
 
-  //check whether variable localSongs is empty (null) or contains a value
-
-  //if there are no items in local storage
+  // Checks whether variable localSongs is empty (null) or contains a value
+  // If there are no items in local storage:
   if (localSongs == null) {
     localSongs = [song];
   } else {
-    // check to see if there is an existing item with the same properties
+    // Checks to see if there is an existing item with the same properties
     if (localSongs.find(element => element.id === song.id)) {
       console.log('Task id already exists');
     } else {
       localSongs.push(song);
     }
   }
-
-  //pushes objects into empty array above songList
-  //no need to push into songList after it's pushed into localSongs
-  // songList.push(song);
-
-  //set this new item localSongs in our localStorage object
+  
+  // Set this new item localSongs in our localStorage object
   localStorage.setItem('songs', JSON.stringify(localSongs))
-  //call displayTask after the object is pushed 
+  // Call displayTask after the object is pushed 
   displaySongs();
 }
 
-// Call the function with test values for the input paramaters
-//addSong("Working", "Sam Hui", "Genre", "Relaxed", "Relaxed song from Sam");
-
-// Log the array to the console.
-// console.log(songList);
-
-// Get the modal
+// Get the modal box
 var modal = document.getElementById("myModal");
 
-// Get the image and insert it inside the modal - use its "alt" text as a caption
-//var img = document.getElementById("myImg");
+// Get the image and insert it inside the modal - use its "alt" text as a caption, being the genre the user inputted 
 var modalImg = document.getElementById("img01");
 var captionText = document.getElementById("caption");
 var description = document.getElementById("description");
@@ -193,14 +184,16 @@ function handleDelEvent(event) {
 
   modalLiItem.remove();
   localSongs.forEach(function(songArrayElement, songArrayIndex) {
+    // If the songArrayElement matches the modalLiItem id for our HTML list item
     if (songArrayElement.id == modalLiItem.getAttribute('dataid')) {
+      // Splice to remove items from array when we know the index of item in array 
       localSongs.splice(songArrayIndex, 1);
       console.log('removed');
     }
   })
 
   localStorage.setItem('songs', JSON.stringify(localSongs));
-  //closes modal box when the delete button is clicked
+  // Closes modal box when the delete button is clicked
   modal.style.display = 'none';
   console.log(localSongs);
   console.log(modalItem.getAttribute('dataid'))

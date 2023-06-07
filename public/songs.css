@@ -97,13 +97,13 @@ h1 {
 }
 
 
-/* whole area of form, padding makes it bigger 10em */
+/* whole area of form, where padding makes it bigger */
 form {
   margin: 0 auto;
   padding: 2em;
 }
 
-/* for label and input box, padding inbetween increases */
+/* for label and input box, where padding inbetween increases */
 .form-row {
   display: flex;
   flex-direction: column;
@@ -121,7 +121,7 @@ form {
   padding-bottom: 1em;
 }
 
-/* input box and option values, flex-grow  */
+/* use of flex-grow to control input box and genre option values  */
 .form-row > input,
 .form-row > input::placeholder {
   padding: .5em;
@@ -184,10 +184,6 @@ form {
   flex-direction: row;
   justify-content: flex-start;
   border: 1px solid gray;
-/*
-  padding: 1em;
-  margin-bottom: 1em;
-*/
 }
 
 .item {
@@ -268,14 +264,19 @@ img {
   background-color: rgba(97, 80, 80, 0.4); /* Black w/ opacity */
 }
 
+/* I retrieved the css positon from https://stackoverflow.com/questions/19467693/how-to-make-popup-look-at-the-centre-of-the-screen to make my popup exactly centeredapplying a negative top margin of half the div height, and a negative left margin of half the div width */
+/* Setting the overflow value to scroll adds a scrollbar to scroll inside the modal box if the text goes beyond the modal box size */
+
 .modal-display-area {
   overflow: scroll;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   margin: auto;
   display: block;
   width: 30%;
   height: 80%;
-  margin-top: 5%;
-  margin-bottom: 10%;
   border: 1px solid black;
   background-color: #EDEBEB;
 }
@@ -289,7 +290,7 @@ img {
   width: 70%;
 }
 
-/* Caption of Modal Image */
+/* Genre display in Modal Image */
 #caption {
   margin: auto;
   display: block;
@@ -298,11 +299,11 @@ img {
   font-family: 'PT Sans Caption', sans-serif;
   color: black;
   padding-bottom: 0;
-  padding-top: 5px;
+  padding-top: .6em;
   font-size: 30px;
 }
 
-/* Description of Modal Image */
+/* Description entry in Modal Image */
 #description-div {
   margin: auto;
   display: flex;
@@ -324,7 +325,7 @@ img {
   font-size: 18px;
 }
 
-/* Del button of Modal Image  */
+/* Delete button of Modal Image  */
 #del-button-div {
   margin: auto;
   display: flex;
@@ -352,7 +353,7 @@ img {
   margin-left: 3%;
 }
 
-/* Add Animation */
+/* Animation for Modal Box */
 .modal-content, #caption {  
   -webkit-animation-name: zoom;
   -webkit-animation-duration: 0.6s;
@@ -370,7 +371,7 @@ img {
   to {transform:scale(1)}
 }
 
-/* The Close Button */
+/* The Close Button in the Modal Image */
 .close {
   color: black;
   padding-right: .3em;
@@ -398,6 +399,8 @@ img {
   #songs { grid-template-columns: repeat(1, 1fr); }
 }
 
+/* I resized the font, images, margin, padding and dimensions of content for smaller mobile screens using the CSS Box Model */
+
 @media (max-width: 700px) {
 
 .first-rectangle {
@@ -419,6 +422,7 @@ img {
   border-top: 1px solid black;
 }
 
+/* Using nowrap ensures my text isn't separated line by line */
 .content .pink-text {
   font-size: 90px;
   white-space: nowrap;
@@ -447,7 +451,6 @@ h1 {
   white-space: nowrap;
 }
 
-/* input box and option values, flex-grow  */
 .form-row > input,
 .form-row > input::placeholder,
 .form-row > select,
@@ -455,11 +458,6 @@ h1 {
   width: 1000px;
   font-size: 50px;
 }
-
-/* #description {
-  width: 1000px;
-  font-size: 50px;
-} */
 
 .song-list-div {
   border: none;
@@ -487,14 +485,8 @@ h1 {
 img {
     width: 130px;
 }
-  
-/* I retrieved the css positon from https://stackoverflow.com/questions/19467693/how-to-make-popup-look-at-the-centre-of-the-screen to make my popup exactly centeredapplying a negative top margin of half the div height, and a negative left margin of half the div width */
 
 .modal-display-area {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width: 70%;
   height: 70%
 }
@@ -530,3 +522,4 @@ img {
 }
   
 }
+
