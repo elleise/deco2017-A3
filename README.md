@@ -30,3 +30,16 @@ I suggest improving performance optimizations to reduce loading times, especiall
 
 Another thing to consider is making the tracking application more personalized for the user with the ability to add the song cover image unique to each song item in their entries list. This can be done by extending the tracker’s capabilities by using an API like the Spotify API to retrieve the song cover image. You can consider retrieving more information like the album name of the song or the duration of the song. By providing these well-considered strategic recommendations, I aim to enable future developers to build upon my existing application and contribute to the continuous improvement and success of my Song Mood tracker application. 
 
+# References (Genre Images)
+
+Dance party cover image for Spotify. (n.d.). RouteNote Blog. Retrieved June 1, 2023, from https://routenote.com/blog/top-10-dance-electronic-playlists/.
+
+Graphic design of Ariana Grande . (n.d.). PopUp. Retrieved June 1, 2023, from https://www.vasava.es/en/portfolio/pop-up.
+
+H.E.R. Spotify cover image. (n.d.). Twitter. Retrieved June 1, 2023, from https://twitter.com/Spotify/status/1234572941104427009.
+
+Rock classics cover image for Spotify. (2021). RouteNote Blog. Retrieved June 1, 2023, from https://routenote.com/blog/top-10-dance-electronic-playlists/.
+
+spotify top 100 hip hop (DRAKE COVER). (n.d.). GoShoppi. Retrieved June 1, 2023, from https://www.tfianobles.top/products.aspx?cname=spotify+top+100+hip+hop&cid=10. 
+
+
